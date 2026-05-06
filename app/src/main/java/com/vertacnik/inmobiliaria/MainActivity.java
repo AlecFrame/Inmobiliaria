@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -30,32 +31,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        if (binding.appBarMain.fab != null) {
-            binding.appBarMain.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).setAnchorView(R.id.fab).show());
-        }
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         assert navHostFragment != null;
+
         NavController navController = navHostFragment.getNavController();
 
-        NavigationView navigationView = binding.navView;
-        if (navigationView != null) {
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings)
-                    .setOpenableLayout(binding.drawerLayout)
-                    .build();
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationView, navController);
-        }
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_transform
+        )
+                .setOpenableLayout(binding.drawerLayout)
+                .build();
 
-        BottomNavigationView bottomNavigationView = binding.appBarMain.contentMain.bottomNavView;
-        if (bottomNavigationView != null) {
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow)
-                    .build();
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        }
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+
+        binding.navView.setNavigationItemSelectedListener(item -> {
+
+            if (item.getItemId() == R.id.nav_logout) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Logout")
+                        .setMessage("¿Estás seguro que querés salir de la sesión?")
+                        .setPositiveButton("Sí", (dialog, which) -> {
+                            // Enviar a la primera activity
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                        .setCancelable(false)
+                        .show();
+                binding.drawerLayout.closeDrawers();
+                return true;
+            }
+
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+
+            if (handled) {
+                binding.drawerLayout.closeDrawers();
+            }
+
+            return handled;
+        });
     }
 
     @Override
