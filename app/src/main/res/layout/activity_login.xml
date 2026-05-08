@@ -8,7 +8,6 @@
     tools:context=".ui.LoginActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Inmobiliaria.AppBarOverlay"
@@ -22,54 +21,5 @@
             app:popupTheme="@style/Theme.Inmobiliaria.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <EditText
-        android:id="@+id/etContrasenia"
-        android:layout_width="216dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="Constraseña"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUsuario" />
-
-    <Button
-        android:id="@+id/btLogIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Ingresar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContrasenia" />
-
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="216dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="196dp"
-        android:ems="10"
-        android:hint="Usuario"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="Inmobiliaria La Punta"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

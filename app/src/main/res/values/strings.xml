@@ -22,5 +22,4 @@
     <string name="image_view_item_transform_content_description">Represents an image view in the
         item
     </string>
-    <string name="login">LogIn</string>
 </resources>
