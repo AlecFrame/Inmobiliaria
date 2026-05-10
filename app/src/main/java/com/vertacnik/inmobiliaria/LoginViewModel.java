@@ -20,21 +20,13 @@ import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mensaje;
-
     public LoginViewModel(@NonNull Application application) {
         super(application);
-    }
-    public LiveData<String> getMensaje() {
-        if (mensaje==null) {
-            mensaje = new MutableLiveData<>();
-        }
-        return mensaje;
     }
 
     public void iniciarSesion(String email, String clave) {
         if (email.isBlank() || clave.isBlank()) {
-            mensaje.setValue("Complete todos los campos");
+            Toast.makeText(getApplication(), "Complete todos los campos", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -45,8 +37,10 @@ public class LoginViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    // ApiClient.guardarToken(getApplication(), response.body());
-                    Log.d("INMUEBLE_LOGS", response.body()); // mostrar token
+                    String token = response.body();
+                    ApiClient.guardarToken(getApplication(), token);
+                    Log.d("INMUEBLE_LOGS", token); // mostrar token
+
                     Intent i = new Intent(getApplication(), MainActivity.class);
                     i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(i);
@@ -54,6 +48,8 @@ public class LoginViewModel extends AndroidViewModel {
                     Log.d("INMUEBLE_LOGS", response.message()); // mensaje de error
                     Log.d("INMUEBLE_LOGS", response.code()+""); // muestra código del error
                     Log.d("INMUEBLE_LOGS", response.errorBody().toString()+""); // trae el conjunto
+
+                    Toast.makeText(getApplication(), "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
                 }
             }
 

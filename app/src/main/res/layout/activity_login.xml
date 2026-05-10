@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Ingrese el email"
+        android:hint="Ingrese un email"
         android:inputType="text"
         android:text="luisprofessor@gmail.com"
         android:textSize="20sp"
