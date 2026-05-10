@@ -5,12 +5,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_transform"
-            android:icon="@drawable/ic_camera_black_24dp"
-            android:title="@string/menu_transform" />
+            android:id="@+id/inicioFragment"
+            android:icon="@drawable/icons8_address"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/icons8_profile"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/nav_inmueble"
+            android:icon="@drawable/icons8_home_black"
+            android:title="Inmuebles" />
+        <item
+            android:id="@+id/nav_inquilinos"
+            android:icon="@drawable/icons8_people"
+            android:title="Inquilinos" />
+        <item
+            android:id="@+id/nav_contratos"
+            android:icon="@drawable/icons8_documents"
+            android:title="Contratos" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@android:drawable/btn_dialog"
+            android:icon="@drawable/icons8_emergency_exit"
             android:title="Logout" />
     </group>
 </menu>
