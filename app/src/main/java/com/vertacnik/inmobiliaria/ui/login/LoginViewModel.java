@@ -1,4 +1,4 @@
-package com.vertacnik.inmobiliaria;
+package com.vertacnik.inmobiliaria.ui.login;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -9,9 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
+import com.vertacnik.inmobiliaria.MainActivity;
 import com.vertacnik.inmobiliaria.request.ApiClient;
 
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package com.vertacnik.inmobiliaria;
+package com.vertacnik.inmobiliaria.ui.login;
 
 import android.os.Bundle;
 
