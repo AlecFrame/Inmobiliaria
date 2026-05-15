@@ -18,8 +18,12 @@
     <fragment
         android:id="@+id/inmueblesFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmueblesFragment"
-        android:label="fragment_inmuebles"
-        tools:layout="@layout/fragment_inmuebles" />
+        android:label="@string/inmuebles"
+        tools:layout="@layout/fragment_inmuebles" >
+        <action
+            android:id="@+id/action_inmueblesFragment_to_inmuebleDetalleFragment"
+            app:destination="@id/inmuebleDetalleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inquilinosFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
@@ -30,4 +34,13 @@
         android:name="com.vertacnik.inmobiliaria.ui.perfil.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/inmuebleDetalleFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmuebleDetalleFragment"
+        android:label="@string/detalles_del_inmueble"
+        tools:layout="@layout/fragment_inmueble_detalle" >
+        <action
+            android:id="@+id/action_inmuebleDetalleFragment_to_inmueblesFragment"
+            app:destination="@id/inmueblesFragment" />
+    </fragment>
 </navigation>
