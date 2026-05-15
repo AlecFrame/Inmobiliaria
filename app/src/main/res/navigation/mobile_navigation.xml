@@ -3,11 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_transform">
+    app:startDestination="@id/inicioFragment">
 
     <fragment
-        android:id="@+id/nav_transform"
-        android:name="com.vertacnik.inmobiliaria.ui.transform.TransformFragment"
-        android:label="@string/menu_transform"
-        tools:layout="@layout/fragment_transform" />
+        android:id="@+id/inicioFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inicio.InicioFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_inicio" />
+    <fragment
+        android:id="@+id/contratosFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.contrato.ContratosFragment"
+        android:label="fragment_contratos"
+        tools:layout="@layout/fragment_contratos" />
+    <fragment
+        android:id="@+id/inmueblesFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmueblesFragment"
+        android:label="fragment_inmuebles"
+        tools:layout="@layout/fragment_inmuebles" />
+    <fragment
+        android:id="@+id/inquilinosFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
+        android:label="fragment_inquilinos"
+        tools:layout="@layout/fragment_inquilinos" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.perfil.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
 </navigation>
