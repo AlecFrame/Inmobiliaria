@@ -1,13 +1,338 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.perfil.PerfilFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:paddingHorizontal="20dp">
 
+        <Button
+            android:id="@+id/btPerfilCambiarClave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFFFFF"
+            android:paddingVertical="12dp"
+            android:text="Cambiar Contraseña"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="26dp"
+            app:icon="@drawable/key_24px2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btPerfilEditar"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:id="@+id/tvPerfilTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nombre Apellido"
+            android:textAlignment="center"
+            android:textColor="@color/inm_black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilUserImage" />
+
+        <TextView
+            android:id="@+id/tvPerfilSubTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/drawer_background_text"
+            android:paddingVertical="4dp"
+            android:text="PROPIETARIO - NN inmuebles"
+            android:textAlignment="center"
+            android:textColor="@color/primaryDark"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilTitulo" />
+
+        <TextView
+            android:id="@+id/tvPerfilUserImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/user_view"
+            android:gravity="center"
+            android:text="NA"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.071" />
+
+        <LinearLayout
+            android:id="@+id/llPerfilDatos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_perfil"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPerfilSubTitulo">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/perfil_img_dni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.16"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/person_24px" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perfil_tvDniHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DNI"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/perfil_tvDni"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DNI"
+                        android:textColor="@color/inm_black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/perfilSeparator1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="30dp"
+                android:background="?attr/popupMenuBackground"
+                android:backgroundTint="#D1CCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/perfil_img_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.16"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/person_24px" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perfil_tvNombreHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/perfil_tvNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre"
+                        android:textColor="@color/inm_black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/perfilSeparator2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="30dp"
+                android:background="?attr/popupMenuBackground"
+                android:backgroundTint="#D1CCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/perfil_img_apellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.16"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/person_24px" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perfil_tvApellidoHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/perfil_tvApellido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido"
+                        android:textColor="@color/inm_black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/perfilSeparator3"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="30dp"
+                android:background="?attr/popupMenuBackground"
+                android:backgroundTint="#D1CCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/perfil_img_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.16"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/mail_24px" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perfil_tvEmailHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/perfil_tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="@color/inm_black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/perfilSeparator4"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="30dp"
+                android:background="?attr/popupMenuBackground"
+                android:backgroundTint="#D1CCDC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/perfil_img_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.16"
+                    android:paddingVertical="4dp"
+                    android:src="@drawable/call_24px" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/perfil_tvTelefonoHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Telefono"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/perfil_tvTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Telefono"
+                        android:textColor="@color/inm_black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btPerfilEditar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primary"
+            android:drawableStart="@drawable/edit_square_24px"
+            android:drawableTint="#FFFFFF"
+            android:enabled="false"
+            android:paddingVertical="14dp"
+            android:text="Editar Perfil"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/item_transform_image_length"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llPerfilDatos" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
