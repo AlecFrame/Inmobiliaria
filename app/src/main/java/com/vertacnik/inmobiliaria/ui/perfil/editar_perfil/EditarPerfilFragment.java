@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.vertacnik.inmobiliaria.MainActivity;
 import com.vertacnik.inmobiliaria.R;
 import com.vertacnik.inmobiliaria.databinding.FragmentPerfilEditarBinding;
 
@@ -33,6 +34,9 @@ public class EditarPerfilFragment extends Fragment {
         });
 
         vm.getPerfilActualizado().observe(getViewLifecycleOwner(), result -> {
+            MainActivity m = (MainActivity) getActivity();
+            m.cargarPropietario();
+
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main)
                     .navigate(R.id.action_editarPerfilFragment_to_perfilFragment);
         });

@@ -59,6 +59,13 @@ public class EditarPerfilViewModel extends AndroidViewModel {
                                       String apellido, String email,
                                       String telefono) {
         Propietario p = mPropietario.getValue();
+
+        if (dni.isBlank() || nombre.isBlank() || apellido.isBlank()
+                || email.isBlank() || telefono.isBlank()) {
+            mToastMessage.postValue("Todos los datos son obligatorios");
+            return;
+        }
+
         p.setNombre(nombre);
         p.setApellido(apellido);
         p.setDni(dni);
