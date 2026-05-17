@@ -1,6 +1,7 @@
 package com.vertacnik.inmobiliaria;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vertacnik.inmobiliaria.databinding.ActivityMainBinding;
+import com.vertacnik.inmobiliaria.request.ApiClient;
+import com.vertacnik.inmobiliaria.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding b;
@@ -113,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
         b.drawerLayout.closeDrawers();
     }
     private void logout() {
-
+        ApiClient.eliminarCredenciales(getApplication());
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(i);
     }
 
     @Override

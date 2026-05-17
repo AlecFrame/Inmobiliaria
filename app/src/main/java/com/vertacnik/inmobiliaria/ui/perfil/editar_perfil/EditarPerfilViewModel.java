@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class EditarPerfilViewModel extends AndroidViewModel {
     MutableLiveData<Propietario> mPropietario;
     private MutableLiveData<String> mToastMessage;
+    private MutableLiveData<Boolean> mPerfilActualizado;
 
     public EditarPerfilViewModel(@NonNull Application application) {
         super(application);
@@ -38,6 +39,13 @@ public class EditarPerfilViewModel extends AndroidViewModel {
             mToastMessage = new MutableLiveData<>();
         }
         return mToastMessage;
+    }
+
+    public LiveData<Boolean> getPerfilActualizado() {
+        if (mPerfilActualizado==null) {
+            mPerfilActualizado = new MutableLiveData<>();
+        }
+        return mPerfilActualizado;
     }
 
     public void recuperarPropietario(Bundle b) {
@@ -70,6 +78,7 @@ public class EditarPerfilViewModel extends AndroidViewModel {
                     Log.d("LOG_PERFIL_EDITAR", "Propietario actualizado");
                     mToastMessage.postValue("Propietario actualizado");
                     mPropietario.postValue(response.body());
+                    mPerfilActualizado.postValue(true);
                 }else{
                     Log.d("LOG_PERFIL_EDITAR_ERROR","Código: " + response.code());
                     try {

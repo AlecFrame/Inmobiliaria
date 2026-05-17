@@ -19,6 +19,7 @@ import retrofit2.Response;
 
 public class PerfilCambiarClaveViewModel extends AndroidViewModel {
     private MutableLiveData<String> mToastMessage;
+    private MutableLiveData<Boolean> mClaveCambiada;
 
     public PerfilCambiarClaveViewModel(@NonNull Application application) {
         super(application);
@@ -29,6 +30,13 @@ public class PerfilCambiarClaveViewModel extends AndroidViewModel {
             mToastMessage = new MutableLiveData<>();
         }
         return mToastMessage;
+    }
+
+    public LiveData<Boolean> getClaveCambiada() {
+        if (mClaveCambiada==null) {
+            mClaveCambiada = new MutableLiveData<>();
+        }
+        return mClaveCambiada;
     }
 
     public void cambiarClave(String actual, String nueva) {
@@ -44,6 +52,7 @@ public class PerfilCambiarClaveViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) {
                     Log.d("LOG_CAMBIARCLAVE", "Contraseña actualizada correctamente");
                     mToastMessage.postValue("Contraseña actualizada correctamente");
+                    mClaveCambiada.postValue(true);
                 } else {
                     Log.d("LOG_CAMBIARCLAVE_ERROR", "Código: " + response.code());
                     try {

@@ -38,7 +38,6 @@ public class PerfilViewModel extends AndroidViewModel {
         }
         return mToastMessage;
     }
-
     public void cargarPropietario() {
         ApiClient.MiServicioInmobiliaria servicio = ApiClient.getServicio();
         String token = ApiClient.obtenerToken(getApplication());

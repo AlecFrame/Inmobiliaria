@@ -32,6 +32,12 @@ public class PerfilCambiarClaveFragment extends Fragment {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         });
 
+        vm.getClaveCambiada().observe(getViewLifecycleOwner(), result -> {
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_perfilCambiarClaveFragment_to_perfilFragment);
+        });
+
+
         b.btClavePerfilCambiar.setOnClickListener(v -> {
             vm.cambiarClave(
                     b.etClavePerfilActual.getEditText().getText().toString(),

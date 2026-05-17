@@ -7,12 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.vertacnik.inmobiliaria.R;
 import com.vertacnik.inmobiliaria.databinding.FragmentPerfilEditarBinding;
 
 public class EditarPerfilFragment extends Fragment {
@@ -28,6 +30,11 @@ public class EditarPerfilFragment extends Fragment {
 
         vm.getToastMessage().observe(getViewLifecycleOwner(), message -> {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        });
+
+        vm.getPerfilActualizado().observe(getViewLifecycleOwner(), result -> {
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_editarPerfilFragment_to_perfilFragment);
         });
 
         vm.getPropietario().observe(getViewLifecycleOwner(), p -> {
