@@ -40,6 +40,11 @@ public class PerfilCambiarClaveViewModel extends AndroidViewModel {
     }
 
     public void cambiarClave(String actual, String nueva) {
+        if (actual.isBlank() || nueva.isBlank()) {
+            mToastMessage.postValue("Los campos son obligatorios");
+            return;
+        }
+
         ApiClient.MiServicioInmobiliaria servicio = ApiClient.getServicio();
         String token = ApiClient.obtenerToken(getApplication());
         if(token == null) { return; }

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             cambiarEncabezado(p.getNombre(), p.getApellido(), p.getDni(), p.getEmail());
         });
 
-        vm.cargarPropietario();
+        cargarPropietario();
     }
 
     @SuppressLint("SetTextI18n")
@@ -127,5 +127,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void cargarPropietario() {
+        vm.cargarPropietario();
     }
 }
