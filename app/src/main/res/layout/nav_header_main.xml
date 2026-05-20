@@ -3,28 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/primary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/nav_header_desc"
-        android:paddingTop="8dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+    <TextView
+        android:id="@+id/tvUserImageDrawer"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/baseline_circle_24"
+        android:backgroundTint="@color/secondary"
+        android:gravity="center"
+        android:text="NP"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textColorLink="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tvNombreDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="@string/nav_header_title" />
+        android:text="Nombre Apellido"
+        android:textColor="@color/background"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvMailDrawer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+        android:text="Email@gmail.com"
+        android:textColor="@color/background2"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDatosDrawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="PROPIETARIO - DNI NN"
+        android:textColor="@color/background3"
+        android:textStyle="bold" />
+
 </LinearLayout>

@@ -1,15 +1,14 @@
 package com.vertacnik.inmobiliaria;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -18,90 +17,119 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vertacnik.inmobiliaria.databinding.ActivityMainBinding;
+import com.vertacnik.inmobiliaria.request.ApiClient;
+import com.vertacnik.inmobiliaria.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding b;
+    private MainViewModel vm;
+    private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        b = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(b.getRoot());
 
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setSupportActionBar(b.appBarMain.toolbar); // iniciar el ToolBar
 
-        setSupportActionBar(binding.appBarMain.toolbar);
+        initNavigation();
+        initDrawerMenu();
 
+        // ----- Cosas del ViewModel ----- //
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
+
+        vm.getToastMessage().observe(this, message -> {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        });
+
+        // Cargar el encabezado del menú hamburgueza
+        vm.getPropietario().observe(this, p -> {
+            cambiarEncabezado(p.getNombre(), p.getApellido(), p.getDni(), p.getEmail());
+        });
+
+        cargarPropietario();
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void cambiarEncabezado(String nombre, String apellido, String dni, String email) {
+        View headerView = b.navView.getHeaderView(0);
+
+        TextView tvImageDrawer = headerView.findViewById(R.id.tvUserImageDrawer);
+        TextView tvNombreDrawer = headerView.findViewById(R.id.tvNombreDrawer);
+        TextView tvMailDrawer = headerView.findViewById(R.id.tvMailDrawer);
+        TextView tvDatosDrawer = headerView.findViewById(R.id.tvDatosDrawer);
+
+        tvImageDrawer.setText(nombre.charAt(0)+""+apellido.charAt(0));
+        tvNombreDrawer.setText(nombre+" "+apellido);
+        tvMailDrawer.setText(email);
+        tvDatosDrawer.setText("PROPIETARIO - DNI "+dni);
+    }
+    private void initNavigation() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
-        assert navHostFragment != null;
 
-        NavController navController = navHostFragment.getNavController();
+        if (navHostFragment == null) return;
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        navController = navHostFragment.getNavController();
+
+        appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.inicioFragment,
                 R.id.perfilFragment,
                 R.id.inmueblesFragment,
                 R.id.inquilinosFragment,
                 R.id.contratosFragment
         )
-                .setOpenableLayout(binding.drawerLayout)
+                .setOpenableLayout(b.drawerLayout)
                 .build();
 
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-
-        binding.navView.setNavigationItemSelectedListener(item -> {
-
+        NavigationUI.setupActionBarWithNavController(
+                this,
+                navController,
+                appBarConfiguration
+        );
+    }
+    private void initDrawerMenu() {
+        b.navView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_logout) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Logout")
-                        .setMessage("¿Estás seguro que querés salir de la sesión?")
-                        .setPositiveButton("Sí", (dialog, which) -> {
-                            // Enviar a la primera activity
-                        })
-                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                        .setCancelable(false)
-                        .show();
-                binding.drawerLayout.closeDrawers();
+                showLogoutDialog();
                 return true;
             }
-
             boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
-
             if (handled) {
-                binding.drawerLayout.closeDrawers();
+                b.drawerLayout.closeDrawers();
             }
-
             return handled;
         });
     }
+    private void showLogoutDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("¿Estás seguro que querés salir de la sesión?")
+                .setPositiveButton("Sí", (dialog, which) -> {
+                    logout();
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .setCancelable(false)
+                .show();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result = super.onCreateOptionsMenu(menu);
-        // Using findViewById because NavigationView exists in different layout files
-        // between w600dp and w1240dp
-        NavigationView navView = findViewById(R.id.nav_view);
-        if (navView == null) {
-            // The navigation drawer already has the items including the items in the overflow menu
-            // We only inflate the overflow menu if the navigation drawer isn't visible
-            getMenuInflater().inflate(R.menu.overflow, menu);
-        }
-        return result;
+        b.drawerLayout.closeDrawers();
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.nav_settings) {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            navController.navigate(R.id.nav_settings);
-        }
-        return super.onOptionsItemSelected(item);
+    private void logout() {
+        ApiClient.eliminarCredenciales(getApplication());
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void cargarPropietario() {
+        vm.cargarPropietario();
     }
 }
