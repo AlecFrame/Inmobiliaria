@@ -15,7 +15,7 @@ public class Inmueble implements Serializable {
     private boolean disponible;
     private double longitud;
     private int idPropietario;
-    private Propietario propietario;
+    private Propietario duenio;
     private boolean tieneContratoVigente;
 
     public Inmueble() {
@@ -38,7 +38,7 @@ public class Inmueble implements Serializable {
         this.disponible = disponible;
         this.longitud = longitud;
         this.idPropietario = idPropietario;
-        this.propietario = propietario;
+        this.duenio = propietario;
         this.tieneContratoVigente = tieneContratoVigente;
     }
 
@@ -78,9 +78,10 @@ public class Inmueble implements Serializable {
     public int getIdPropietario() { return idPropietario; }
     public void setIdPropietario(int idPropietario) { this.idPropietario = idPropietario; }
 
-    public Propietario getPropietario() { return propietario; }
-    public void setPropietario(Propietario propietario) { this.propietario = propietario; }
+    public Propietario getDuenio() { return duenio; }
+    public void setDuenio(Propietario duenio) { this.duenio = duenio; }
 
     public boolean isTieneContratoVigente() { return tieneContratoVigente; }
     public void setTieneContratoVigente(boolean tieneContratoVigente) { this.tieneContratoVigente = tieneContratoVigente; }
+    public boolean getTieneContratoVigente() { return tieneContratoVigente; }
 }

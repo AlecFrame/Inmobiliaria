@@ -13,11 +13,13 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public class ApiClient {
     public final static String BASE_URL = "https://capacitacion.alwaysdata.net/";
@@ -38,8 +40,23 @@ public class ApiClient {
 
         @GET("api/Propietarios")
         Call<Propietario> getPropietario(@Header("Authorization") String token);
+
+        //INMUEBLES
         @GET("/api/Inmuebles")
         Call<List<Inmueble>> getListaInmuebles(@Header("Authorization") String token);
+        @GET("/api/Inmuebles/GetContratoVigente")
+        Call<List<Inmueble>> getInmueblesConContratoVigente(@Header("Authorization") String token);
+        @PUT("api/propietarios/fix-id3")
+        Call<Void> restablecerUsuario3();
+
+        @PUT("api/Propietarios/actualizar")
+        Call<Propietario> actualizarPropietario(@Header("Authorization") String token, @Body Propietario propietario);
+
+        @FormUrlEncoded
+        @PUT("api/Propietarios/changePassword")
+        Call<Void> cambiarClave(@Header("Authorization") String token,
+                                @Field("currentPassword") String actual,
+                                @Field("newPassword") String nueva);
     }
     public static void guardarToken(Context context, String token) {
         SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
@@ -51,5 +68,11 @@ public class ApiClient {
     public static String obtenerToken(Context context) {
         SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
         return sp.getString("token", null);
+    }
+    public static void eliminarCredenciales(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("token.xml", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.apply();
     }
 }

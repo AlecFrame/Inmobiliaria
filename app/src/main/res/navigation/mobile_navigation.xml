@@ -10,11 +10,13 @@
         android:name="com.vertacnik.inmobiliaria.ui.inicio.InicioFragment"
         android:label="Inicio"
         tools:layout="@layout/fragment_inicio" />
+
     <fragment
         android:id="@+id/contratosFragment"
         android:name="com.vertacnik.inmobiliaria.ui.contrato.ContratosFragment"
         android:label="fragment_contratos"
         tools:layout="@layout/fragment_contratos" />
+
     <fragment
         android:id="@+id/inmueblesFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmueblesFragment"
@@ -24,16 +26,46 @@
             android:id="@+id/action_inmueblesFragment_to_inmuebleDetalleFragment"
             app:destination="@id/inmuebleDetalleFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/inquilinosFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
         android:label="fragment_inquilinos"
         tools:layout="@layout/fragment_inquilinos" />
+
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.vertacnik.inmobiliaria.ui.perfil.PerfilFragment"
-        android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfilFragment_to_editarPerfilFragment"
+            app:destination="@id/editarPerfilFragment" />
+        <action
+            android:id="@+id/action_perfilFragment_to_perfilCambiarClaveFragment"
+            app:destination="@id/perfilCambiarClaveFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.perfil.editar_perfil.EditarPerfilFragment"
+        android:label="Editar Perfil"
+        tools:layout="@layout/fragment_perfil_editar" >
+        <action
+            android:id="@+id/action_editarPerfilFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/perfilCambiarClaveFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.perfil.cambiar_clave_perfil.PerfilCambiarClaveFragment"
+        android:label="Cambiar Contraseña"
+        tools:layout="@layout/fragment_perfil_cambiar_clave" >
+        <action
+            android:id="@+id/action_perfilCambiarClaveFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/inmuebleDetalleFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmuebleDetalleFragment"
@@ -43,4 +75,5 @@
             android:id="@+id/action_inmuebleDetalleFragment_to_inmueblesFragment"
             app:destination="@id/inmueblesFragment" />
     </fragment>
+
 </navigation>

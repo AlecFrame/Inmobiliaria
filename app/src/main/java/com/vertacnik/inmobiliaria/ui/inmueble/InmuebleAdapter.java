@@ -2,6 +2,7 @@ package com.vertacnik.inmobiliaria.ui.inmueble;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,16 @@ import com.vertacnik.inmobiliaria.R;
 import com.vertacnik.inmobiliaria.modelo.Inmueble;
 
 import java.util.List;
-import java.util.Random;
 
 public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.InmuebleViewHolder> {
     private List<Inmueble> inmuebles;
     private Context context;
     private LayoutInflater layoutInflater;
+    //Contadores para las imagenes. Son atributos para que no se reseteen
+    // cada vez que se ejecuta el metodo que carga la tarjeta
+    private int indiceCasa = 0;
+    private int indiceDepto = 0;
+    private int indiceLocal = 0;
 
     public InmuebleAdapter(List<Inmueble> inmuebles, Context context, LayoutInflater layoutInflater) {
         this.inmuebles = inmuebles;
@@ -45,10 +50,44 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         holder.direccion.setText(inmuebleActual.getDireccion());
         holder.valor.setText("$"+inmuebleActual.getValor());
 
+        boolean estado = inmuebleActual.getTieneContratoVigente();
+        holder.estado.setText(estado ? "ALQUILADO" : "NO ALQUILADO");
+        if(!estado){
+            holder.estado.setBackgroundResource(R.drawable.badge_no_disponible);
+        }else {
+            holder.estado.setBackgroundResource(R.drawable.badge_disponible);
+
+        }
+
         String tipo = inmuebleActual.getTipo();
         holder.tipo.setText(tipo);
 
-        //Carga de imagenes randoms
+        //Cargamos las imagenes
+        asignacionImagen(tipo,holder);
+
+        holder.verMas.setOnClickListener(v -> {
+            Bundle bundel = new Bundle();
+            bundel.putSerializable("inmueble", inmuebleActual);
+            Navigation.findNavController(v)
+                    .navigate(R.id.action_inmueblesFragment_to_inmuebleDetalleFragment, bundel);
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return inmuebles.size();
+    }
+
+
+    // Asigna imágenes en orden rotativo según el tipo de inmueble.
+    // Cada contador (indiceCasa, indiceDepto, indiceLocal) solo avanza
+    // cuando se procesa un item de su tipo. El operador % evita que el
+    // índice se salga del rango del array, repitiendo el ciclo si hay
+    // más items que imágenes disponibles.
+    public void asignacionImagen(String tipo, InmuebleViewHolder holder){
+
+        //Carga de imagenes en una pool
         int[] poolCasa = {
                 R.drawable.fondo_01_purple_casa,
                 R.drawable.fondo_04_green_casa,
@@ -62,39 +101,24 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         int[] poolLocal = {
                 R.drawable.fondo_03_terracotta_local,
         };
-        Random random = new Random();
 
-        switch (tipo.trim().toLowerCase()){
+        switch (tipo.trim().toLowerCase()) {
             case "casa":
-                int imgCasa = poolCasa[random.nextInt(poolCasa.length)];
-                holder.fondo.setImageResource(imgCasa);
+                holder.fondo.setImageResource(poolCasa[indiceCasa % poolCasa.length]);
+                indiceCasa++;
                 break;
             case "departamento":
-                int imgDepto = poolDepto[random.nextInt(poolDepto.length)];
-                holder.fondo.setImageResource(imgDepto);
+                holder.fondo.setImageResource(poolDepto[indiceDepto % poolDepto.length]);
+                indiceDepto++;
                 break;
             case "localcomercial":
-                int imgLocal = poolLocal[random.nextInt(poolLocal.length)];
-                holder.fondo.setImageResource(imgLocal);
+                holder.fondo.setImageResource(poolLocal[indiceLocal % poolLocal.length]);
+                indiceLocal++;
                 break;
             default:
                 holder.fondo.setImageResource(R.drawable.fondo_01_purple_casa);
                 break;
         }
-
-
-        holder.verMas.setOnClickListener(v -> {
-            Bundle args = new Bundle();
-            args.putSerializable("inmueble", inmuebleActual);
-            Navigation.findNavController(v)
-                    .navigate(R.id.action_inmueblesFragment_to_inmuebleDetalleFragment, args);
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return inmuebles.size();
     }
 
     //Clase interna - Representacion de la Card
@@ -105,6 +129,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         TextView tipo;
         TextView uso;
         TextView valor;
+        TextView estado;
         ImageView fondo;
         Button verMas;
 
@@ -115,12 +140,11 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
             tipo =  itemView.findViewById(R.id.tvTipo);
             uso =  itemView.findViewById(R.id.tvUso);
             valor =  itemView.findViewById(R.id.tvValor);
+            estado = itemView.findViewById(R.id.tvEstado);
             fondo = itemView.findViewById(R.id.ivFondo);
             verMas = itemView.findViewById(R.id.btnVerMas);
         }
 
     }
-    public interface OnVerMasClickListener {
-        void onVerMasClick(Inmueble inmueble);
-    }
+
 }
