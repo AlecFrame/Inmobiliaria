@@ -48,6 +48,8 @@ public class ApiClient {
         Call<List<Inmueble>> getInmueblesConContratoVigente(@Header("Authorization") String token);
         @PUT("api/propietarios/fix-id3")
         Call<Void> restablecerUsuario3();
+        @PUT("api/Inmuebles/actualizar")
+        Call<Inmueble> cambiarDisponibilidad(@Header("Authorization") String token, @Body Inmueble inmueble);
 
         @PUT("api/Propietarios/actualizar")
         Call<Propietario> actualizarPropietario(@Header("Authorization") String token, @Body Propietario propietario);

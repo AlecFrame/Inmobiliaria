@@ -24,13 +24,6 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
 
-            <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_myplaces"
-                app:tint="#FFFFFF" />
-
         </FrameLayout>
 
         <!-- CUERPO PRINCIPAL -->
@@ -86,14 +79,6 @@
             </LinearLayout>
 
             <!-- UBICACIÓN -->
-            <TextView
-                android:id="@+id/tvUbicacionDetalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="📍 San Luis"
-                android:textColor="#888888"
-                android:textSize="13sp" />
 
             <!-- BADGE DISPONIBLE -->
             <LinearLayout
@@ -104,12 +89,11 @@
                 android:orientation="horizontal"
                 android:padding="12dp">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@android:drawable/checkbox_on_background"
-                    app:tint="#7C6AF7" />
+                <CheckBox
+                    android:id="@+id/chDisponible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -117,6 +101,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvInmuebleDisponibilidad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Disponible para alquilar"
@@ -437,145 +422,14 @@
             </LinearLayout>
 
             <!-- DIRECCIÓN TEXTUAL -->
-            <TextView
-                android:id="@+id/tvDireccionUbicacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="📍 Av. del Fundador 2050, La Punta, San Luis"
-                android:textColor="#555555"
-                android:textSize="13sp" />
 
             <!-- ===== SECCIÓN PROPIETARIO ===== -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="PROPIETARIO"
-                android:textColor="#AAAAAA"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:background="#EEEEEE" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/badge_disponible_detalle"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <!-- NOMBRE -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@android:drawable/ic_menu_myplaces"
-                        app:tint="#7C6AF7" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="NOMBRE"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvPropietarioNombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Juan Pérez"
-                    android:textColor="#1A1A2E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <!-- TELÉFONO -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@android:drawable/ic_menu_call"
-                        app:tint="#7C6AF7" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TELÉFONO"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvPropietarioTelefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="2664-123456"
-                    android:textColor="#1A1A2E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <!-- EMAIL -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginEnd="8dp"
-                        android:src="@android:drawable/ic_dialog_email"
-                        app:tint="#7C6AF7" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="EMAIL"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvPropietarioEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:text="juan@email.com"
-                    android:textColor="#1A1A2E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -587,34 +441,7 @@
             android:background="#FFFFFF"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:gravity="center_vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="✏ EDITAR"
-                android:textColor="#7C6AF7"
-                android:textSize="13sp"
-                app:backgroundTint="#F0EEFF"
-                app:cornerRadius="12dp"
-                app:strokeColor="#7C6AF7"
-                app:strokeWidth="1dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnVerContrato"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="VER CONTRATO"
-                android:textColor="#FFFFFF"
-                android:textSize="13sp"
-                app:backgroundTint="#7C6AF7"
-                app:cornerRadius="12dp" />
-
-        </LinearLayout>
+            android:gravity="center_vertical"/>
 
     </LinearLayout>
 
