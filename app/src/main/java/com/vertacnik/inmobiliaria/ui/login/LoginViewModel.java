@@ -60,6 +60,8 @@ public class LoginViewModel extends AndroidViewModel {
                     ApiClient.guardarToken(getApplication(), token);
                     Log.d("LOG_LOGIN", token);
 
+                    desRegistrarSensorAgitar();
+
                     Intent i = new Intent(getApplication(), MainActivity.class);
                     i.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     getApplication().startActivity(i);

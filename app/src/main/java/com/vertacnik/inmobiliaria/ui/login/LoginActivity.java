@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         b.btIniciarSesion.setOnClickListener(v -> {
-            vm.desRegistrarSensorAgitar();
             vm.iniciarSesion(
                     b.etUsuario.getEditText().getText().toString(),
                     b.etClave.getEditText().getText().toString()
