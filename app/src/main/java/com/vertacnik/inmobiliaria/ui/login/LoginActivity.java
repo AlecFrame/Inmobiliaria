@@ -1,6 +1,13 @@
 package com.vertacnik.inmobiliaria.ui.login;
 
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,5 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         b.btRestablecerClave.setOnClickListener(v -> {
             vm.restablecerUsuario();
         });
+
+        if (checkSelfPermission(android.Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{android.Manifest.permission.CALL_PHONE}, 1);
+        }
+
+        vm.registrarSensorAgitar();
     }
+
+
 }

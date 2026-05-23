@@ -27,10 +27,6 @@ public class InmueblesFragment extends Fragment {
     private InmueblesViewModel mViewModel;
     private InmuebleAdapter inmuebleAdapter;
 
-    public static InmueblesFragment newInstance() {
-        return new InmueblesFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
