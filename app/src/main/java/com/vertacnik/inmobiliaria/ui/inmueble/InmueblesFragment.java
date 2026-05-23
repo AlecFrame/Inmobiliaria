@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
@@ -34,6 +35,15 @@ public class InmueblesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentInmueblesBinding.inflate(inflater, container, false);
+
+        binding.fabAgregarInmueble.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v)
+                        .navigate(R.id.action_inmueblesFragment_to_inmuebleNuevoFragment);
+            }
+        });
+
         mViewModel = new ViewModelProvider(this).get(InmueblesViewModel.class);
 
 

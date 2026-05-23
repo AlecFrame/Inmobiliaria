@@ -49,15 +49,17 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         holder.ambientes.setText(inmuebleActual.getAmbientes()+" ");
         holder.direccion.setText(inmuebleActual.getDireccion());
         holder.valor.setText("$"+inmuebleActual.getValor());
+        holder.uso.setText(inmuebleActual.getUso());
 
-        boolean estado = inmuebleActual.getTieneContratoVigente();
-        holder.estado.setText(estado ? "ALQUILADO" : "NO ALQUILADO");
+        boolean estado = inmuebleActual.isDisponible();
+        holder.estado.setText(estado ? "DISPONIBLE" : "NO DISPONIBLE");
         if(!estado){
             holder.estado.setBackgroundResource(R.drawable.badge_no_disponible);
         }else {
             holder.estado.setBackgroundResource(R.drawable.badge_disponible);
 
         }
+        holder.contratoVigente.setText(inmuebleActual.isTieneContratoVigente() ? "Contrato Vigente" : "Desocupado");
 
         String tipo = inmuebleActual.getTipo();
         holder.tipo.setText(tipo);
@@ -130,6 +132,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         TextView uso;
         TextView valor;
         TextView estado;
+        TextView contratoVigente;
         ImageView fondo;
         Button verMas;
 
@@ -141,6 +144,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
             uso =  itemView.findViewById(R.id.tvUso);
             valor =  itemView.findViewById(R.id.tvValor);
             estado = itemView.findViewById(R.id.tvEstado);
+            contratoVigente = itemView.findViewById(R.id.tvContrato);
             fondo = itemView.findViewById(R.id.ivFondo);
             verMas = itemView.findViewById(R.id.btnVerMas);
         }

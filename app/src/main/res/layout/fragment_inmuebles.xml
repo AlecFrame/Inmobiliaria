@@ -60,7 +60,15 @@
                     android:layout_marginTop="24dp"
                     android:text="Reintentar"
                     style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
         </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAgregarInmueble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="24dp"
+            android:contentDescription="Agregar inmueble"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:tint="@android:color/white" />
 
 </FrameLayout>

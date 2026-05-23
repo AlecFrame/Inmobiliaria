@@ -48,8 +48,9 @@ public class InmueblesViewModel extends AndroidViewModel {
 
         //Contador regresivo para liberar el await el cual desprende otro hilo
         CountDownLatch latch = new CountDownLatch(2);
+        Call<List<Inmueble>> callListaCompleta = servicio.getListaInmuebles(token);
 
-        servicio.getListaInmuebles(token).enqueue(new Callback<List<Inmueble>>() {
+        callListaCompleta.enqueue(new Callback<List<Inmueble>>() {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.body() != null) {
@@ -69,8 +70,8 @@ public class InmueblesViewModel extends AndroidViewModel {
                 latch.countDown();
             }
         });
-
-        servicio.getInmueblesConContratoVigente(token).enqueue(new Callback<List<Inmueble>>() {
+        Call<List<Inmueble>> callListaContratoVigente =servicio.getInmueblesConContratoVigente(token);
+        callListaContratoVigente.enqueue(new Callback<List<Inmueble>>() {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.body() != null) {

@@ -24,4 +24,5 @@
     </string>
     <string name="inmuebles">Inmuebles</string>
     <string name="detalles_del_inmueble">Detalles del Inmueble</string>
+    <string name="agregar_inmueble">Agregar Inmueble</string>
 </resources>

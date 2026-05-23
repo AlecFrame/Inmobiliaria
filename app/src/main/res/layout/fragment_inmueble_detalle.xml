@@ -153,38 +153,6 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@android:drawable/ic_menu_agenda"
-                        app:tint="#CCCCCC" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="CÓDIGO"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvCodigoDetalle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="INM-021"
-                        android:textColor="#1A1A2E"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
                         android:src="@android:drawable/ic_menu_sort_by_size"
                         app:tint="#CCCCCC" />
 

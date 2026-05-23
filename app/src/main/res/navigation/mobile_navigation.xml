@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_inmueblesFragment_to_inmuebleDetalleFragment"
             app:destination="@id/inmuebleDetalleFragment" />
+        <action
+            android:id="@+id/action_inmueblesFragment_to_inmuebleNuevoFragment"
+            app:destination="@id/inmuebleNuevoFragment" />
     </fragment>
 
     <fragment
@@ -73,6 +76,15 @@
         tools:layout="@layout/fragment_inmueble_detalle" >
         <action
             android:id="@+id/action_inmuebleDetalleFragment_to_inmueblesFragment"
+            app:destination="@id/inmueblesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inmuebleNuevoFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmuebleNuevoFragment"
+        android:label="fragment_inmueble_nuevo"
+        tools:layout="@layout/fragment_inmueble_nuevo" >
+        <action
+            android:id="@+id/action_inmuebleNuevoFragment_to_inmueblesFragment"
             app:destination="@id/inmueblesFragment" />
     </fragment>
 

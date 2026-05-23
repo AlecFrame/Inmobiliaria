@@ -35,7 +35,7 @@
                     android:background="@drawable/badge_disponible"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="DISPONIBLE"
+                    android:text="-"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
                     android:textStyle="bold"
@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvIdInmueble"
+                    android:id="@+id/tvContrato"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -51,11 +51,11 @@
                     android:background="@drawable/badge_id"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="INM-021"
+                    android:text="-"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +75,7 @@
                             android:id="@+id/tvDireccion"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Av. del Fundador 2050"
+                            android:text="-"
                             android:textColor="#1A1A2E"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -95,10 +95,11 @@
                                     android:id="@+id/tvValor"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="$185.000"
+                                    android:text="-"
                                     android:textColor="#5B4FCF"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,7 +146,7 @@
                                     android:background="@drawable/badge_tag"
                                     android:paddingHorizontal="10dp"
                                     android:paddingVertical="5dp"
-                                    android:text="🛏 3 amb"
+                                    android:text="🛏 -"
                                     android:textColor="#444455"
                                     android:textSize="11sp" />
 
@@ -157,7 +158,7 @@
                                     android:background="@drawable/badge_tag"
                                     android:paddingHorizontal="10dp"
                                     android:paddingVertical="5dp"
-                                    android:text="Casa"
+                                    android:text="-"
                                     android:textColor="#444455"
                                     android:textSize="11sp" />
 
@@ -168,7 +169,7 @@
                                     android:background="@drawable/badge_tag"
                                     android:paddingHorizontal="10dp"
                                     android:paddingVertical="5dp"
-                                    android:text="Residencial"
+                                    android:text="-"
                                     android:textColor="#444455"
                                     android:textSize="11sp" />
 

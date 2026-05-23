@@ -15,7 +15,11 @@
         <item
             android:id="@+id/inmueblesFragment"
             android:icon="@drawable/home_24px"
-            android:title="Inmuebles" />
+            android:title="@string/inmuebles" />
+        <item
+            android:id="@+id/inmuebleNuevoFragment"
+            android:icon="@drawable/icons8_plus_math"
+            android:title="@string/agregar_inmueble" />
         <item
             android:id="@+id/inquilinosFragment"
             android:icon="@drawable/groups_24px"
