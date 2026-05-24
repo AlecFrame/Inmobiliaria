@@ -177,8 +177,8 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnVerMas"
-                            android:layout_width="219dp"
-                            android:layout_height="46dp"
+                            android:layout_width="221dp"
+                            android:layout_height="53dp"
                             android:layout_marginTop="12dp"
                             android:paddingVertical="10dp"
                             android:text="Ver más"

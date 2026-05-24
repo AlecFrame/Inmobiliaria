@@ -87,7 +87,7 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
 
         try {
             if (direccion.isEmpty() || precio.isEmpty() || ambiente.isEmpty()) {
-
+                Toast.makeText(getApplication(), "Debe completar todos los campos", Toast.LENGTH_LONG).show();
             }else{
                 Inmueble nuevoInmueble = new Inmueble();
 
@@ -134,14 +134,14 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onFailure(Call<Inmueble> call, Throwable t) {
-
+                            Toast.makeText(getApplication(), "Error del servidor.", Toast.LENGTH_LONG).show();
                         }
                     });
 
                 }
             }
         }catch (NumberFormatException e){
-
+                Toast.makeText(getApplication(), "Debe ingresar un numero valido", Toast.LENGTH_LONG).show();
         }
 
 
