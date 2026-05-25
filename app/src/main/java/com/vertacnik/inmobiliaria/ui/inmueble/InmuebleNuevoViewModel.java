@@ -82,11 +82,13 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
             tipoInmuebleSeleccionado.setValue(tipo);
         }
     }
-
-    public void crearNuevoInmueble(String direccion, String precio, boolean comercial, boolean residencial, String ambiente, boolean disponible){
+    public void crearNuevoInmueble(String direccion, String precio, boolean comercial,
+                                   boolean residencial, String ambiente, boolean disponible,
+                                   String superficie, String latitud, String longitud){
 
         try {
-            if (direccion.isEmpty() || precio.isEmpty() || ambiente.isEmpty()) {
+            if (direccion.isEmpty() || precio.isEmpty() || ambiente.isEmpty() || superficie.isEmpty() ||
+                    latitud.isEmpty() || longitud.isEmpty()) {
                 Toast.makeText(getApplication(), "Debe completar todos los campos", Toast.LENGTH_LONG).show();
             }else{
                 Inmueble nuevoInmueble = new Inmueble();
@@ -95,6 +97,9 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
                 nuevoInmueble.setDireccion(direccion);
                 nuevoInmueble.setValor(Integer.parseInt(precio));
                 nuevoInmueble.setTipo(tipoInmuebleSeleccionado.getValue());
+                nuevoInmueble.setSuperficie(Integer.parseInt(superficie));
+                nuevoInmueble.setLatitud(Integer.parseInt(latitud));
+                nuevoInmueble.setLongitud(Integer.parseInt(longitud));
 
                 if (comercial) {
                     nuevoInmueble.setUso("Comercial");
@@ -124,7 +129,7 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
                         @Override
                         public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                             if (response.isSuccessful()) {
-
+                                inmuebleMutable.postValue(response.body());
                                 Toast.makeText(getApplication(), "Inmueble creado", Toast.LENGTH_LONG).show();
                             }else {
                                 Toast.makeText(getApplication(), "Error al crear el inmueble", Toast.LENGTH_LONG).show();
@@ -143,10 +148,6 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
         }catch (NumberFormatException e){
                 Toast.makeText(getApplication(), "Debe ingresar un numero valido", Toast.LENGTH_LONG).show();
         }
-
-
-
-
     }
 
     public void recibirFoto(ActivityResult resultado) {

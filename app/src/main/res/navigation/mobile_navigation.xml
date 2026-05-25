@@ -81,7 +81,7 @@
     <fragment
         android:id="@+id/inmuebleNuevoFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inmueble.InmuebleNuevoFragment"
-        android:label="fragment_inmueble_nuevo"
+        android:label="Nuevo Inmueble"
         tools:layout="@layout/fragment_inmueble_nuevo" >
         <action
             android:id="@+id/action_inmuebleNuevoFragment_to_inmueblesFragment"

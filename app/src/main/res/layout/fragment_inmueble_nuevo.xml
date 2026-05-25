@@ -86,7 +86,7 @@
                 android:id="@+id/tvUbicacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="32dp"
                 android:letterSpacing="0.1"
                 android:text="UBICACIÓN"
                 android:textColor="#1A1A1A"
@@ -103,7 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:hint="Dirección"
                 app:boxCornerRadiusBottomEnd="8dp"
@@ -112,21 +112,91 @@
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#CCCCCC"
                 app:hintTextColor="#888888"
-                app:startIconTint="#9E82CC"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvUbicacion">
+                app:layout_constraintTop_toBottomOf="@id/tvUbicacion"
+                app:startIconTint="#9E82CC">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="-"
                     android:textColor="#1A1A1A"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Campo Localidad -->
+            <LinearLayout
+                android:id="@+id/containerUbication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:flow_horizontalAlign="center"
+                app:flow_verticalAlign="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilDireccion">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLatitud"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="0.5"
+                    android:hint="Latitud"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxStrokeColor="#CCCCCC"
+                    app:hintTextColor="#888888"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chipGroupTipo"
+                    app:prefixTextColor="#1A1A1A">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLatitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textColor="#1A1A1A"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLongitud"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="0.5"
+                    android:hint="Longitud"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxStrokeColor="#CCCCCC"
+                    app:hintTextColor="#888888"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chipGroupTipo"
+                    app:prefixTextColor="#1A1A1A">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLongitud"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textColor="#1A1A1A"
+                        android:textSize="15sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLocalidad"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -145,7 +215,15 @@
                 app:startIconTint="#9E82CC"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tilDireccion"/>
+                app:layout_constraintTop_toBottomOf="@+id/containerUbication">
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/listDivider" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- ==================== SECCIÓN CARACTERÍSTICAS ==================== -->
             <TextView
@@ -176,14 +254,30 @@
                 app:layout_constraintTop_toBottomOf="@id/tvCaracteristicas" />
 
 
+            <!-- ==================== AMBIENTES ==================== -->
+
+            <TextView
+                android:id="@+id/tvLabelUso2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="Tipo"
+                android:textColor="#555555"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerToggleUso" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/containerToggleUso"
-                android:layout_width="383dp"
+                android:layout_width="match_parent"
                 android:layout_height="67dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/container_section"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelUso">
 
@@ -213,19 +307,16 @@
                 </RadioGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- ==================== AMBIENTES ==================== -->
-
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupTipo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/containerToggleUso"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelUso2"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -282,6 +373,40 @@
 
             </com.google.android.material.chip.ChipGroup>
 
+            <!-- Stepper ambientes -->
+
+            <!-- Divider -->
+
+            <!-- ==================== PRECIO ==================== -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSuperficie"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Superficie"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#CCCCCC"
+                app:hintTextColor="#888888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupTipo"
+                app:prefixTextColor="#1A1A1A">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSuperficie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textColor="#1A1A1A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:id="@+id/tvLabelAmbientes"
                 android:layout_width="wrap_content"
@@ -292,13 +417,8 @@
                 android:textColor="#888888"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chipGroupTipo" />
+                app:layout_constraintTop_toBottomOf="@id/tilSuperficie" />
 
-            <!-- Stepper ambientes -->
-
-            <!-- Divider -->
-
-            <!-- ==================== PRECIO ==================== -->
             <View
                 android:id="@+id/dividerAmbientes"
                 android:layout_width="0dp"
@@ -338,7 +458,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:text="-"
                     android:textColor="#1A1A1A"
                     android:textSize="15sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -370,10 +489,11 @@
                 android:id="@+id/cbDisponible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:checked="true"
                 android:text="Disponible"
-                app:layout_constraintBottom_toTopOf="@+id/tvUbicacion"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.904"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardFoto" />
 

@@ -42,22 +42,22 @@ public class InmueblesFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(InmueblesViewModel.class);
 
+        mViewModel.getInmueblesMutable().observe(getViewLifecycleOwner(), inmuebles -> {
+            inmuebleAdapter = new InmuebleAdapter(inmuebles,getContext(), getLayoutInflater());
 
-        mViewModel.getInmueblesMutable().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
-            @Override
-            public void onChanged(List<Inmueble> inmuebles) {
-                inmuebleAdapter = new InmuebleAdapter(inmuebles,getContext(), getLayoutInflater());
+            GridLayoutManager glm = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false);
 
-                GridLayoutManager glm = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false);
+            binding.rvListaInmueble.setLayoutManager(glm);
+            binding.rvListaInmueble.setAdapter(inmuebleAdapter);
 
-                binding.rvListaInmueble.setLayoutManager(glm);
-                binding.rvListaInmueble.setAdapter(inmuebleAdapter);
-            }
+            mViewModel.cargarScrollInmuebleId(getArguments());
         });
+
+        mViewModel.getScrollInmuebleId().observe(getViewLifecycleOwner(), id -> {
+            binding.rvListaInmueble.smoothScrollToPosition(id);
+        });
+
         mViewModel.cargarInmuebles();
         return binding.getRoot();
     }
-
-
-
 }

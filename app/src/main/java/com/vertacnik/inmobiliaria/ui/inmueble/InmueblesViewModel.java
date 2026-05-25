@@ -2,6 +2,7 @@ package com.vertacnik.inmobiliaria.ui.inmueble;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,10 +25,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InmueblesViewModel extends AndroidViewModel {
-
     private MutableLiveData<List<Inmueble>> inmueblesMutable;
     private List<Inmueble> listaTodos = new ArrayList<>();
     private List<Inmueble> listaVigentes = new ArrayList<>();
+    private MutableLiveData<Integer> scrollInmuebleId;
     private Context context;
 
     public InmueblesViewModel(@NonNull Application application) {
@@ -40,6 +41,12 @@ public class InmueblesViewModel extends AndroidViewModel {
             inmueblesMutable = new MutableLiveData<>();
         }
         return inmueblesMutable;
+    }
+    public LiveData<Integer> getScrollInmuebleId() {
+        if (scrollInmuebleId==null) {
+            scrollInmuebleId = new MutableLiveData<>();
+        }
+        return scrollInmuebleId;
     }
 
     public void cargarInmuebles() {
@@ -131,6 +138,17 @@ public class InmueblesViewModel extends AndroidViewModel {
             case 404: Log.e("API_ERROR", "No encontrado"); break;
             case 500: Log.e("API_ERROR", "Error del servidor"); break;
             default:  Log.e("API_ERROR", "Error desconocido: Código " + codigo); break;
+        }
+    }
+
+    public void cargarScrollInmuebleId(Bundle bundle) {
+        int id = -1;
+        if (bundle!=null) {
+            id = bundle.getInt("NuevoInmuebleID");
+
+            if (id!=-1) {
+                scrollInmuebleId.setValue(id);
+            }
         }
     }
 

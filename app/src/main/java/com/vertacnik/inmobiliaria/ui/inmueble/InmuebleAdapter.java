@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.vertacnik.inmobiliaria.R;
 import com.vertacnik.inmobiliaria.modelo.Inmueble;
+import com.vertacnik.inmobiliaria.request.ApiClient;
 
 import java.util.List;
 
@@ -65,7 +67,15 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         holder.tipo.setText(tipo);
 
         //Cargamos las imagenes
-        asignacionImagen(tipo,holder);
+        if (inmuebleActual.getImagen()!=null && !inmuebleActual.getImagen().isBlank()) {
+            Glide.with(context)
+                    .load(ApiClient.BASE_URL + inmuebleActual.getImagen())
+                    .placeholder(R.drawable.fondo_01_purple_casa)
+                    .error(R.drawable.fondo_01_purple_casa)
+                    .into(holder.fondo);
+        }else
+            asignacionImagen(tipo,holder);
+
 
         holder.verMas.setOnClickListener(v -> {
             Bundle bundel = new Bundle();

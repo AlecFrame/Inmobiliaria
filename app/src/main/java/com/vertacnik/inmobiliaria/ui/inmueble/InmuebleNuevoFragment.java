@@ -14,6 +14,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -36,16 +37,19 @@ public class InmuebleNuevoFragment extends Fragment {
     //Es para abrir la galeria
     private Intent intent;
 
-
-    public static InmuebleNuevoFragment newInstance() {
-        return new InmuebleNuevoFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentInmuebleNuevoBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(this).get(InmuebleNuevoViewModel.class);
+
+        mViewModel.getInmuebleMutable().observe(getViewLifecycleOwner(), inmueble -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("NuevoInmuebleID", inmueble.getIdInmueble());
+
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_inmuebleNuevoFragment_to_inmueblesFragment, bundle);
+        });
 
         binding.cardFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +69,15 @@ public class InmuebleNuevoFragment extends Fragment {
                 boolean resindecial = binding.rbResidencial.isChecked();
                 String ambiente = binding.srAmbientes.getSelectedItem().toString();
                 boolean disponible = binding.cbDisponible.isChecked();
+                String superficie = binding.etSuperficie.getText().toString();
+                String latitud = binding.etSuperficie.getText().toString();
+                String longitud = binding.etSuperficie.getText().toString();
 
                 int chipsId = binding.chipGroupTipo.getCheckedChipId();
 
                 mViewModel.evaluarChipSeleccionado(chipsId);
-                mViewModel.crearNuevoInmueble(direccion, precio, comercial, resindecial, ambiente,disponible);
+                mViewModel.crearNuevoInmueble(direccion, precio, comercial, resindecial, ambiente,
+                        disponible, superficie, latitud, longitud);
 
             }
         });
@@ -98,7 +106,7 @@ public class InmuebleNuevoFragment extends Fragment {
                     @Override
                     public void onActivityResult(ActivityResult resultado) {
                         mViewModel.recibirFoto(resultado);
-                        Log.d("galeria","onActivityResult"+resultado.toString());
+                        Log.d("galeria","onActivityResult"+resultado);
                     }
                 });
     }
