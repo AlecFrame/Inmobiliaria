@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vertacnik.inmobiliaria.modelo.Inmueble;
+import com.vertacnik.inmobiliaria.modelo.Inquilino;
 import com.vertacnik.inmobiliaria.modelo.Propietario;
 
 import java.util.List;
@@ -44,6 +45,11 @@ public class ApiClient {
 
         @GET("api/Propietarios")
         Call<Propietario> getPropietario(@Header("Authorization") String token);
+
+        @GET("api/Inquilinos")
+        Call<List<Inquilino>> getListaInquilinos(@Header("Authorization") String token);
+        @GET("api/Inquilinos/GetContrato")
+        Call<List<Inquilino>> getInquilinosConContrato(@Header("Authorization") String token);
 
         //INMUEBLES
         @GET("/api/Inmuebles")

@@ -29,12 +29,19 @@
             android:id="@+id/action_inmueblesFragment_to_inmuebleNuevoFragment"
             app:destination="@id/inmuebleNuevoFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/inquilinosFragment"
-        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
-        android:label="fragment_inquilinos"
-        tools:layout="@layout/fragment_inquilinos" />
+        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment">
+        <action
+            android:id="@+id/action_inquilinosFragment_to_inquilinoFragment"
+            app:destination="@id/inquilinoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inquilinoFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinoFragment"
+        android:label="fragment_inquilino"
+        tools:layout="@layout/fragment_inquilino" />
 
     <fragment
         android:id="@+id/perfilFragment"
