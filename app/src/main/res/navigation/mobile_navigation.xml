@@ -36,7 +36,12 @@
             android:id="@+id/action_inquilinosFragment_to_inquilinoFragment"
             app:destination="@id/inquilinoFragment" />
     </fragment>
-
+    <!--no se, ya veo otro dia-->
+    <fragment
+        android:id="@+id/inquilinosFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
+        android:label="Inquilinos"
+        tools:layout="@layout/fragment_inquilinos" />
     <fragment
         android:id="@+id/inquilinoFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinoFragment"
