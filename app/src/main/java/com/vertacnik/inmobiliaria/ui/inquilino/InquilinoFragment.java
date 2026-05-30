@@ -28,14 +28,15 @@ public class InquilinoFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(InquilinoViewModel.class);
 
-        mViewModel.getInquilinoMutable().observe(getViewLifecycleOwner(), new Observer<Inquilino>() {
-            @Override
-            public void onChanged(Inquilino inquilino) {
-                binding.V1nombre.setText(inquilino.getNombre()+""+inquilino.getApellido());
-                binding.V1dni.setText(inquilino.getDni());
-                binding.V1email.setText(inquilino.getEmail());
-                binding.V1telefono.setText(inquilino.getTelefono());
-            }
+        mViewModel.getInquilinoMutable().observe(getViewLifecycleOwner(), inquilino -> {
+            binding.V1nombre.setText(inquilino.getNombre() + " " + inquilino.getApellido());
+            binding.V1dni.setText(inquilino.getDni());
+            binding.V1telefono.setText(inquilino.getTelefono());
+            binding.V1email.setText(inquilino.getEmail());
+            binding.VGnombre.setText(inquilino.getGNombre() + " " + inquilino.getGApellido());
+            binding.VGdni.setText(inquilino.getGDni());
+            binding.VGtelefono.setText(inquilino.getGTelefono());
+            binding.VGemail.setText(inquilino.getGEmail());
         });
 
         mViewModel.cargarInquilino(getArguments());

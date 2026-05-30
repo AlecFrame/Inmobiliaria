@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/inicioFragment">
+    app:startDestination="@id/inquilinosFragment">
 
     <fragment
         android:id="@+id/inicioFragment"
@@ -31,21 +31,18 @@
     </fragment>
     <fragment
         android:id="@+id/inquilinosFragment"
-        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment">
+        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
+        android:label="Inquilinos"
+        tools:layout="@layout/fragment_inquilinos">
         <action
             android:id="@+id/action_inquilinosFragment_to_inquilinoFragment"
             app:destination="@id/inquilinoFragment" />
     </fragment>
-    <!--no se, ya veo otro dia-->
-    <fragment
-        android:id="@+id/inquilinosFragment"
-        android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinosFragment"
-        android:label="Inquilinos"
-        tools:layout="@layout/fragment_inquilinos" />
+
     <fragment
         android:id="@+id/inquilinoFragment"
         android:name="com.vertacnik.inmobiliaria.ui.inquilino.InquilinoFragment"
-        android:label="fragment_inquilino"
+        android:label="Detalle Inquilino"
         tools:layout="@layout/fragment_inquilino" />
 
     <fragment
