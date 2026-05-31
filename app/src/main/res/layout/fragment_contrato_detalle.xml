@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
     tools:context=".ui.contrato.ContratoDetalleFragment">
 
     <LinearLayout
@@ -24,8 +23,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="#FFFFFF"
+            android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingTop="20dp"
             android:paddingBottom="24dp">
@@ -33,11 +32,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
                 android:text="INFORMACIÓN DEL CONTRATO"
                 android:textColor="#AAAAAA"
                 android:textSize="11sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"

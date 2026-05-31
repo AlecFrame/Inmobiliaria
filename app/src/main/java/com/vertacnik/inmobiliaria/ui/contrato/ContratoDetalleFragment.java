@@ -3,6 +3,7 @@ package com.vertacnik.inmobiliaria.ui.contrato;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class ContratoDetalleFragment extends Fragment {
     private FragmentContratoDetalleBinding binding;
     private int idContratoActual;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -42,20 +44,20 @@ public class ContratoDetalleFragment extends Fragment {
                 binding.tvDetFechaInicio.setText(contrato.getFechaInicio());
                 binding.tvDetFechaFin.setText(contrato.getFechaFinalizacion());
                 binding.tvDetMonto.setText("$" + contrato.getMontoAlquiler());
-
-                if (contrato.getInquilino() != null) {
-                    binding.tvDetInquilino.setText(contrato.getInquilino().getNombre() + " "
-                            + contrato.getInquilino().getApellido());
-                }
-                if (contrato.getInmueble() != null) {
-                    binding.tvDetInmueble.setText(contrato.getInmueble().getDireccion());
-                    Glide.with(getContext())
-                            .load(ApiClient.BASE_URL + contrato.getInmueble().getImagen())
-                            .placeholder(R.drawable.fondo_01_purple_casa)
-                            .error(R.drawable.fondo_01_purple_casa)
-                            .into(binding.ivDetFoto);
-                }
             }
+        });
+
+        mViewModel.getContratoInquilinoMutable().observe(getViewLifecycleOwner(), inquilino -> {
+            binding.tvDetInquilino.setText(inquilino.getNombre() + " " + inquilino.getApellido());
+        });
+
+        mViewModel.getContratoInmuebleMutable().observe(getViewLifecycleOwner(), inmueble -> {
+            binding.tvDetInmueble.setText(inmueble.getDireccion());
+            Glide.with(getContext())
+                    .load(ApiClient.BASE_URL + inmueble.getImagen())
+                    .placeholder(R.drawable.fondo_01_purple_casa)
+                    .error(R.drawable.fondo_01_purple_casa)
+                    .into(binding.ivDetFoto);
         });
 
         //Valor del bundle recibido a traves de getArguments

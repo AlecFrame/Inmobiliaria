@@ -1,5 +1,6 @@
 package com.vertacnik.inmobiliaria.ui.contrato;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vertacnik.inmobiliaria.R;
 import com.vertacnik.inmobiliaria.modelo.Pago;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder> {
@@ -32,6 +35,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
         return new PagoViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PagoViewHolder holder, int position) {
         Pago pagoActual = pagos.get(position);
@@ -41,7 +45,12 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
         holder.numero.setText("Número de pago: " + (position + 1));
         holder.contrato.setText("Código de contrato: " + pagoActual.getIdContrato());
         holder.importe.setText("Importe: $" + pagoActual.getMonto());
-        holder.fecha.setText("Fecha de pago: " + pagoActual.getFechaPago());
+
+        // Cambiar el formato de la fecha a uno normal
+        LocalDate fecha = LocalDate.parse(pagoActual.getFechaPago());
+        String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        holder.fecha.setText("Fecha de pago: " + fechaFormateada);
     }
 
     @Override

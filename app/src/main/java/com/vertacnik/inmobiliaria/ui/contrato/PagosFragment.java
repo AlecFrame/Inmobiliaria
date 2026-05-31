@@ -41,6 +41,14 @@ public class PagosFragment extends Fragment {
             }
         });
 
+        mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            binding.tvMensajePagos.setText(message);
+        });
+
+        mViewModel.getMessageVisible().observe(getViewLifecycleOwner(), visible -> {
+            binding.tvMensajePagos.setVisibility(visible);
+        });
+
         //El idContrato llega por el Bundle desde ContratoDetalleFragment
         int idContrato = getArguments() != null ? getArguments().getInt("idContrato") : -1;
         mViewModel.cargarPagos(idContrato);

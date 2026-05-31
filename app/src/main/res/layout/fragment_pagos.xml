@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
     tools:context=".ui.contrato.PagosFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -11,5 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/tvMensajePagos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Cargando pagos..."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </FrameLayout>

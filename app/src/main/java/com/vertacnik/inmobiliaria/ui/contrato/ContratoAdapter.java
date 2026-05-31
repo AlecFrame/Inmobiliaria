@@ -1,5 +1,6 @@
 package com.vertacnik.inmobiliaria.ui.contrato;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
         return new ContratoViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ContratoViewHolder holder, int position) {
         Contrato contratoActual = contratos.get(position);

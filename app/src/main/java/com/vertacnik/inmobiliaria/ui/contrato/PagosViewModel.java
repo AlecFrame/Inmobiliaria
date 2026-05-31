@@ -1,5 +1,7 @@
 package com.vertacnik.inmobiliaria.ui.contrato;
 
+import static android.view.View.INVISIBLE;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -22,6 +24,8 @@ import retrofit2.Response;
 public class PagosViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Pago>> pagosMutable;
+    private MutableLiveData<String> mMessage;
+    private MutableLiveData<Integer> mMessageVisible;
     private Context context;
 
     public PagosViewModel(@NonNull Application application) {
@@ -35,6 +39,18 @@ public class PagosViewModel extends AndroidViewModel {
         }
         return pagosMutable;
     }
+    public LiveData<String> getMessage() {
+        if (mMessage ==null) {
+            mMessage = new MutableLiveData<>();
+        }
+        return mMessage;
+    }
+    public LiveData<Integer> getMessageVisible() {
+        if (mMessageVisible ==null) {
+            mMessageVisible = new MutableLiveData<>();
+        }
+        return mMessageVisible;
+    }
 
     public void cargarPagos(int idContrato) {
         String token = ApiClient.obtenerToken(context);
@@ -45,9 +61,11 @@ public class PagosViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Pago>> call, Response<List<Pago>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     pagosMutable.postValue(response.body());
+                    mMessageVisible.postValue(INVISIBLE);
                 } else {
                     //La API devuelve 404 cuando el contrato no tiene pagos: mostramos lista vacía
                     Log.d("PAGOS", "Sin pagos para el contrato " + idContrato + " (HTTP " + response.code() + ")");
+                    mMessage.postValue("No se encontraron pagos");
                     pagosMutable.postValue(new ArrayList<>());
                 }
             }
@@ -55,6 +73,7 @@ public class PagosViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<List<Pago>> call, Throwable t) {
                 Log.e("API_ERROR", "Fallo lista pagos: " + t.getMessage());
+                mMessage.postValue("Fallo al cargar la lista de pagos");
                 pagosMutable.postValue(new ArrayList<>());
             }
         });
