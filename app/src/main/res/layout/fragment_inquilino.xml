@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999">
 
         <!-- IMAGEN SUPERIOR CON ÍCONO -->
 
@@ -41,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="John Doe"
+                    android:text="Nombre Apellido"
                     android:textColor="#1A1A2E"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -101,7 +102,7 @@
                         android:id="@+id/V1dni"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12345678"
+                        android:text="-"
                         android:textColor="#1A1A2E"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -136,7 +137,7 @@
                         android:id="@+id/V1telefono"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+54 0000 000000"
+                        android:text="-"
                         android:textColor="#1A1A2E"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -162,7 +163,7 @@
                         android:id="@+id/V1email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="JohnDoe@gmail.com"
+                        android:text="-"
                         android:textColor="#1A1A2E"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -170,139 +171,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-            <!-- FILA 3: SUPERFICIE / (vacío) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <!-- Celda vacía para mantener grilla -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" />
-
-            </LinearLayout>
-
-            <!-- ===== SECCIÓN UBICACIÓN ===== -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:letterSpacing="0.1"
-                android:text="Garante"
-                android:textColor="#AAAAAA"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="6dp"
-                android:background="#EEEEEE" />
-
-            <!-- FILA: LATITUD / LONGITUD -->
-            <TextView
-                android:id="@+id/VGnombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingVertical="10px"
-                android:text="Jane Doe"
-                android:textColor="#1A1A2E"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="DNI"
-                    android:textColor="#AAAAAA"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/VGdni"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="87654321"
-                    android:textColor="#1B1B2F"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="TELEFONO"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/VGtelefono"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+54 0000 000000"
-                        android:textColor="#1A1A2E"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="EMAIL"
-                        android:textColor="#AAAAAA"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/VGemail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="JaneDoe@gmail.com"
-                        android:textColor="#1A1A2E"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- DIRECCIÓN TEXTUAL -->
 
             <!-- ===== SECCIÓN PROPIETARIO ===== -->
 
@@ -313,9 +181,5 @@
                 android:background="#EEEEEE" />
 
         </LinearLayout>
-
-        <!-- BOTONES INFERIORES -->
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

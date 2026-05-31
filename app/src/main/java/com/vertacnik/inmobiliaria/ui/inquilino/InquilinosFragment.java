@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vertacnik.inmobiliaria.databinding.ActivityLoginBinding;
 import com.vertacnik.inmobiliaria.databinding.FragmentInquilinosBinding;
@@ -27,10 +28,6 @@ public class InquilinosFragment extends Fragment {
     private InquilinosViewModel mViewModel;
     private InquilinoAdapter inquilinoAdapter;
 
-    public static InquilinosFragment newInstance() {
-        return new InquilinosFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -39,31 +36,30 @@ public class InquilinosFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(InquilinosViewModel.class);
 
-        mViewModel.getInquilinoMutable().observe(getViewLifecycleOwner(), inquilinos -> {
-            inquilinoAdapter = new InquilinoAdapter(inquilinos,getContext(), getLayoutInflater());
+        mViewModel.getInmuebles().observe(getViewLifecycleOwner(), inmuebles -> {
+            inquilinoAdapter = new InquilinoAdapter(inmuebles,getContext(), getLayoutInflater());
 
             GridLayoutManager glm = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL,false);
 
             binding.rvListaInq.setLayoutManager(glm);
             binding.rvListaInq.setAdapter(inquilinoAdapter);
-
-            mViewModel.cargarScrollInquilinoId(getArguments());
         });
 
-        mViewModel.getScrollInquilinoId().observe(getViewLifecycleOwner(), id -> {
-            binding.rvListaInq.smoothScrollToPosition(id);
+        mViewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         });
 
-        mViewModel.cargarInquilinos();
+        mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            binding.tvMensajeCargandoInmueblesVigentes.setText(message);
+        });
+
+        mViewModel.getMessageVisible().observe(getViewLifecycleOwner(), visible -> {
+            binding.tvMensajeCargandoInmueblesVigentes.setVisibility(visible);
+        });
+
+        mViewModel.cargarInmueblesVigentes();
+
         return binding.getRoot();
-        //return inflater.inflate(R.layout.fragment_inquilinos, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(InquilinosViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

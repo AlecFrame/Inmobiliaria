@@ -49,11 +49,6 @@ public class ApiClient {
         @GET("api/Propietarios")
         Call<Propietario> getPropietario(@Header("Authorization") String token);
 
-        @GET("api/Inquilinos")
-        Call<List<Inquilino>> getListaInquilinos(@Header("Authorization") String token);
-        @GET("api/Inquilinos/GetContrato")
-        Call<List<Inquilino>> getInquilinosConContrato(@Header("Authorization") String token);
-
         //INMUEBLES
         @GET("/api/Inmuebles")
         Call<List<Inmueble>> getListaInmuebles(@Header("Authorization") String token);
@@ -65,6 +60,9 @@ public class ApiClient {
         Call<List<Contrato>> getContratos(@Header("Authorization") String token);
         @GET("api/Pagos/Contrato/{idContrato}")
         Call<List<Pago>> getPagosPorContrato(@Header("Authorization") String token, @Path("idContrato") int idContrato);
+
+        @GET("api/contratos/inmueble/{id}")
+        Call<Contrato> getContratoPorInmueble(@Header("Authorization") String token, @Path("id") int idInmueble);
         @PUT("api/propietarios/fix-id3")
         Call<Void> restablecerUsuario3();
         @PUT("api/Inmuebles/actualizar")

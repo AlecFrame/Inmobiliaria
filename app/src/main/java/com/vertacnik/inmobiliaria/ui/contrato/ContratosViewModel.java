@@ -1,5 +1,7 @@
 package com.vertacnik.inmobiliaria.ui.contrato;
 
+import static android.view.View.INVISIBLE;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -22,6 +24,8 @@ import retrofit2.Response;
 public class ContratosViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Contrato>> contratosMutable;
+    private MutableLiveData<String> mMessage;
+    private MutableLiveData<Integer> mMessageVisible;
     private Context context;
 
     public ContratosViewModel(@NonNull Application application) {
@@ -35,6 +39,18 @@ public class ContratosViewModel extends AndroidViewModel {
         }
         return contratosMutable;
     }
+    public LiveData<String> getMessage() {
+        if (mMessage ==null) {
+            mMessage = new MutableLiveData<>();
+        }
+        return mMessage;
+    }
+    public LiveData<Integer> getMessageVisible() {
+        if (mMessageVisible ==null) {
+            mMessageVisible = new MutableLiveData<>();
+        }
+        return mMessageVisible;
+    }
 
     public void cargarContratos() {
         String token = ApiClient.obtenerToken(context);
@@ -45,8 +61,10 @@ public class ContratosViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     contratosMutable.postValue(response.body());
+                    mMessageVisible.postValue(INVISIBLE);
                 } else {
                     manejarErrorHttp(response.code());
+                    mMessage.postValue("No se encontraron los contratos");
                 }
             }
 
@@ -54,6 +72,7 @@ public class ContratosViewModel extends AndroidViewModel {
             public void onFailure(Call<List<Contrato>> call, Throwable t) {
                 Log.e("API_ERROR", "Fallo lista contratos: " + t.getMessage());
                 Toast.makeText(context, "Sin conexión con el servidor", Toast.LENGTH_SHORT).show();
+                mMessage.postValue("No se encontraron los contratos");
             }
         });
     }

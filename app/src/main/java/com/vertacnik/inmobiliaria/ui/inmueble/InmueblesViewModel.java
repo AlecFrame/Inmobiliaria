@@ -1,5 +1,7 @@
 package com.vertacnik.inmobiliaria.ui.inmueble;
 
+import static android.view.View.INVISIBLE;
+
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ import retrofit2.Response;
 
 public class InmueblesViewModel extends AndroidViewModel {
     private MutableLiveData<List<Inmueble>> inmueblesMutable;
+    private MutableLiveData<String> mMessage;
+    private MutableLiveData<Integer> mMessageVisible;
     private List<Inmueble> listaTodos = new ArrayList<>();
     private List<Inmueble> listaVigentes = new ArrayList<>();
     private MutableLiveData<Integer> scrollInmuebleId;
@@ -41,6 +45,18 @@ public class InmueblesViewModel extends AndroidViewModel {
             inmueblesMutable = new MutableLiveData<>();
         }
         return inmueblesMutable;
+    }
+    public LiveData<String> getMessage() {
+        if (mMessage ==null) {
+            mMessage = new MutableLiveData<>();
+        }
+        return mMessage;
+    }
+    public LiveData<Integer> getMessageVisible() {
+        if (mMessageVisible ==null) {
+            mMessageVisible = new MutableLiveData<>();
+        }
+        return mMessageVisible;
     }
     public LiveData<Integer> getScrollInmuebleId() {
         if (scrollInmuebleId==null) {
@@ -115,6 +131,7 @@ public class InmueblesViewModel extends AndroidViewModel {
     private void compararYPostear() {
         if (listaTodos.isEmpty()) {
             Log.e("API_ERROR", "La lista principal está vacía, nada que postear");
+            mMessage.postValue("No se encontraron los inmuebles");
             return;
         }
 
@@ -129,6 +146,7 @@ public class InmueblesViewModel extends AndroidViewModel {
         }
 
         inmueblesMutable.postValue(listaTodos);
+        mMessageVisible.postValue(INVISIBLE);
     }
 
     private void manejarErrorHttp(int codigo) {

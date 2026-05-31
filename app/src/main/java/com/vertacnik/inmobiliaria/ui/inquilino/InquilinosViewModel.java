@@ -1,33 +1,30 @@
 package com.vertacnik.inmobiliaria.ui.inquilino;
 
+import static android.view.View.INVISIBLE;
+
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.vertacnik.inmobiliaria.modelo.Inquilino;
+import com.vertacnik.inmobiliaria.modelo.Inmueble;
 import com.vertacnik.inmobiliaria.request.ApiClient;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InquilinosViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Inquilino>> inquilinosMutable;
-    private List<Inquilino> listaTodos = new ArrayList<>();
-    private MutableLiveData<Integer> scrollInquilinoId;
+    private MutableLiveData<List<Inmueble>> inmuebleM;
+    private MutableLiveData<String> mToastMessage;
+    private MutableLiveData<String> mMessage;
+    private MutableLiveData<Integer> mMessageVisible;
     private Context context;
 
     public InquilinosViewModel(@NonNull Application application) {
@@ -35,59 +32,55 @@ public class InquilinosViewModel extends AndroidViewModel {
         context = application.getApplicationContext();
     }
 
-    public LiveData<List<Inquilino>> getInquilinoMutable() {
-        if (inquilinosMutable == null) {
-            inquilinosMutable = new MutableLiveData<>();
+    public LiveData<List<Inmueble>> getInmuebles() {
+        if (inmuebleM == null) {
+            inmuebleM = new MutableLiveData<>();
         }
-        return inquilinosMutable;
+        return inmuebleM;
     }
-    public LiveData<Integer> getScrollInquilinoId() {
-        if (scrollInquilinoId==null) {
-            scrollInquilinoId = new MutableLiveData<>();
+    public LiveData<String> getToastMessage() {
+        if (mToastMessage==null) {
+            mToastMessage = new MutableLiveData<>();
         }
-        return scrollInquilinoId;
+        return mToastMessage;
+    }
+    public LiveData<String> getMessage() {
+        if (mMessage ==null) {
+            mMessage = new MutableLiveData<>();
+        }
+        return mMessage;
+    }
+    public LiveData<Integer> getMessageVisible() {
+        if (mMessageVisible ==null) {
+            mMessageVisible = new MutableLiveData<>();
+        }
+        return mMessageVisible;
     }
 
-    public void cargarInquilinos() {
+    public void cargarInmueblesVigentes() {
         String token = ApiClient.obtenerToken(context);
         ApiClient.MiServicioInmobiliaria servicio = ApiClient.getServicio();
 
-        CountDownLatch latch = new CountDownLatch(2);
+        Call<List<Inmueble>> call = servicio.getInmueblesConContratoVigente(token);
 
-        servicio.getListaInquilinos(token).enqueue(new Callback<List<Inquilino>>() {
+        call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<List<Inquilino>> call, Response<List<Inquilino>> response) {
-                if (response.body() != null) listaTodos = response.body();
-                latch.countDown();
+            public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
+                if (response.isSuccessful()) {
+                    inmuebleM.postValue(response.body());
+                    mMessageVisible.postValue(INVISIBLE);
+                } else {
+                    manejarErrorHttp(response.code());
+                    mMessage.postValue("No se encontraron los inmuebles vigentes");
+                }
             }
             @Override
-            public void onFailure(Call<List<Inquilino>> call, Throwable t) { latch.countDown(); }
-        });
-
-        servicio.getInquilinosConContrato(token).enqueue(new Callback<List<Inquilino>>() {
-            @Override
-            public void onResponse(Call<List<Inquilino>> call, Response<List<Inquilino>> response) {
-                latch.countDown();
+            public void onFailure(Call<List<Inmueble>> call, Throwable t) {
+                Log.e("API_ERROR", "Fallo lista inmuebles: " + t.getMessage());
+                mToastMessage.postValue("Sin conexión con el servidor");
+                mMessage.postValue("No se encontraron los inmuebles vigentes");
             }
-            @Override
-            public void onFailure(Call<List<Inquilino>> call, Throwable t) { latch.countDown(); }
         });
-
-        new Thread(() -> {
-            try {
-                latch.await();
-                inquilinosMutable.postValue(listaTodos);
-            } catch (InterruptedException e) { e.printStackTrace(); }
-        }).start();
-    }
-
-    private void compararYPostear() {
-        if (listaTodos.isEmpty()) {
-            Log.e("API_ERROR", "La lista principal está vacía, nada que postear");
-            return;
-        }
-
-        inquilinosMutable.postValue(listaTodos);
     }
 
     private void manejarErrorHttp(int codigo) {
@@ -97,17 +90,6 @@ public class InquilinosViewModel extends AndroidViewModel {
             case 404: Log.e("API_ERROR", "No encontrado"); break;
             case 500: Log.e("API_ERROR", "Error del servidor"); break;
             default:  Log.e("API_ERROR", "Error desconocido: Código " + codigo); break;
-        }
-    }
-
-    public void cargarScrollInquilinoId(Bundle bundle) {
-        int id = -1;
-        if (bundle!=null) {
-            id = bundle.getInt("NuevoInquilinoID");
-
-            if (id!=-1) {
-                scrollInquilinoId.setValue(id);
-            }
         }
     }
 }

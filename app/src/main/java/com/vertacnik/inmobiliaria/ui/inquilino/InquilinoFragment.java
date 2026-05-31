@@ -1,8 +1,8 @@
 package com.vertacnik.inmobiliaria.ui.inquilino;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vertacnik.inmobiliaria.databinding.FragmentInquilinoBinding;
 import com.vertacnik.inmobiliaria.modelo.Inquilino;
@@ -21,6 +22,7 @@ public class InquilinoFragment extends Fragment {
     private InquilinoViewModel mViewModel;
     private FragmentInquilinoBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -28,15 +30,17 @@ public class InquilinoFragment extends Fragment {
 
         mViewModel = new ViewModelProvider(this).get(InquilinoViewModel.class);
 
-        mViewModel.getInquilinoMutable().observe(getViewLifecycleOwner(), inquilino -> {
+        mViewModel.getContrato().observe(getViewLifecycleOwner(), contrato -> {
+            Inquilino inquilino = contrato.getInquilino();
+
             binding.V1nombre.setText(inquilino.getNombre() + " " + inquilino.getApellido());
             binding.V1dni.setText(inquilino.getDni());
             binding.V1telefono.setText(inquilino.getTelefono());
             binding.V1email.setText(inquilino.getEmail());
-            binding.VGnombre.setText(inquilino.getGNombre() + " " + inquilino.getGApellido());
-            binding.VGdni.setText(inquilino.getGDni());
-            binding.VGtelefono.setText(inquilino.getGTelefono());
-            binding.VGemail.setText(inquilino.getGEmail());
+        });
+
+        mViewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         });
 
         mViewModel.cargarInquilino(getArguments());

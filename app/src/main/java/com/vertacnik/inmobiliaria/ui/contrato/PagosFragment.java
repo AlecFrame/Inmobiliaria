@@ -42,11 +42,11 @@ public class PagosFragment extends Fragment {
         });
 
         mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
-            binding.tvMensajePagos.setText(message);
+            binding.tvMensajeCargandoPagos.setText(message);
         });
 
         mViewModel.getMessageVisible().observe(getViewLifecycleOwner(), visible -> {
-            binding.tvMensajePagos.setVisibility(visible);
+            binding.tvMensajeCargandoPagos.setVisibility(visible);
         });
 
         //El idContrato llega por el Bundle desde ContratoDetalleFragment

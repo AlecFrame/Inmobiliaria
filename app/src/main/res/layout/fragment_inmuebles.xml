@@ -71,4 +71,14 @@
             app:srcCompat="@android:drawable/ic_input_add"
             app:tint="@android:color/white" />
 
+        <TextView
+            android:id="@+id/tvMensajeCargandoInmuebles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Cargando Inmuebles..."
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
 </FrameLayout>

@@ -10,4 +10,14 @@
         android:id="@+id/rvListaInq"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tvMensajeCargandoInmueblesVigentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Cargando Inmuebles vigentes..."
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </FrameLayout>

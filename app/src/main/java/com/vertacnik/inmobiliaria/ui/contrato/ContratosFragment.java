@@ -44,6 +44,14 @@ public class ContratosFragment extends Fragment {
             }
         });
 
+        mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            binding.tvMensajeCargandoContratos.setText(message);
+        });
+
+        mViewModel.getMessageVisible().observe(getViewLifecycleOwner(), visible -> {
+            binding.tvMensajeCargandoContratos.setVisibility(visible);
+        });
+
         mViewModel.cargarContratos();
         return binding.getRoot();
     }

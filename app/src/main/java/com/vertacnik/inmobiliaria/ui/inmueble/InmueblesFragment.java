@@ -53,6 +53,14 @@ public class InmueblesFragment extends Fragment {
             mViewModel.cargarScrollInmuebleId(getArguments());
         });
 
+        mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
+            binding.tvMensajeCargandoInmuebles.setText(message);
+        });
+
+        mViewModel.getMessageVisible().observe(getViewLifecycleOwner(), visible -> {
+            binding.tvMensajeCargandoInmuebles.setVisibility(visible);
+        });
+
         mViewModel.getScrollInmuebleId().observe(getViewLifecycleOwner(), id -> {
             binding.rvListaInmueble.smoothScrollToPosition(id);
         });
