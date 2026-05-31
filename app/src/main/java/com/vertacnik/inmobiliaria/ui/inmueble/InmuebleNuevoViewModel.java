@@ -87,7 +87,7 @@ public class InmuebleNuevoViewModel extends AndroidViewModel {
                                    String superficie, String latitud, String longitud){
 
         try {
-            if (direccion.isEmpty() || precio.isEmpty() || ambiente.isEmpty() || superficie.isEmpty() ||
+            if (direccion.isBlank() || precio.isEmpty() || ambiente.isEmpty() || superficie.isEmpty() ||
                     latitud.isEmpty() || longitud.isEmpty()) {
                 Toast.makeText(getApplication(), "Debe completar todos los campos", Toast.LENGTH_LONG).show();
             }else{
