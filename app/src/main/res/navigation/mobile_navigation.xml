@@ -14,8 +14,28 @@
     <fragment
         android:id="@+id/contratosFragment"
         android:name="com.vertacnik.inmobiliaria.ui.contrato.ContratosFragment"
-        android:label="fragment_contratos"
-        tools:layout="@layout/fragment_contratos" />
+        android:label="Contratos"
+        tools:layout="@layout/fragment_contratos" >
+        <action
+            android:id="@+id/action_contratosFragment_to_contratoDetalleFragment"
+            app:destination="@id/contratoDetalleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contratoDetalleFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.contrato.ContratoDetalleFragment"
+        android:label="Detalle del Contrato"
+        tools:layout="@layout/fragment_contrato_detalle" >
+        <action
+            android:id="@+id/action_contratoDetalleFragment_to_pagosFragment"
+            app:destination="@id/pagosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.vertacnik.inmobiliaria.ui.contrato.PagosFragment"
+        android:label="Detalle de Pagos"
+        tools:layout="@layout/fragment_pagos" />
 
     <fragment
         android:id="@+id/inmueblesFragment"

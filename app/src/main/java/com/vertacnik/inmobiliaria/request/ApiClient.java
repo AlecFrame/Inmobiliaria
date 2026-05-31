@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.vertacnik.inmobiliaria.modelo.Contrato;
 import com.vertacnik.inmobiliaria.modelo.Inmueble;
+import com.vertacnik.inmobiliaria.modelo.Pago;
 import com.vertacnik.inmobiliaria.modelo.Propietario;
 
 import java.util.List;
@@ -24,6 +26,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
     public final static String BASE_URL = "https://capacitacion.alwaysdata.net/";
@@ -50,6 +53,12 @@ public class ApiClient {
         Call<List<Inmueble>> getListaInmuebles(@Header("Authorization") String token);
         @GET("/api/Inmuebles/GetContratoVigente")
         Call<List<Inmueble>> getInmueblesConContratoVigente(@Header("Authorization") String token);
+
+        //CONTRATOS Y PAGOS
+        @GET("api/Contratos")
+        Call<List<Contrato>> getContratos(@Header("Authorization") String token);
+        @GET("api/Pagos/Contrato/{idContrato}")
+        Call<List<Pago>> getPagosPorContrato(@Header("Authorization") String token, @Path("idContrato") int idContrato);
         @PUT("api/propietarios/fix-id3")
         Call<Void> restablecerUsuario3();
         @PUT("api/Inmuebles/actualizar")
