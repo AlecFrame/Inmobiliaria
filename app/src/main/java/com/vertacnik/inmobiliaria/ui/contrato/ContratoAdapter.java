@@ -62,6 +62,7 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
         }
 
         holder.estado.setText(contratoActual.isEstado() ? "VIGENTE" : "FINALIZADO");
+        holder.estado.setBackgroundResource(contratoActual.isEstado() ? R.drawable.badge_disponible : R.drawable.badge_no_disponible);
 
         holder.verMas.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
