@@ -69,7 +69,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsuarioTF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="luisprofessor@gmail.com" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +97,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="DEEKQW" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
