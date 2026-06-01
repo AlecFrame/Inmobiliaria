@@ -149,7 +149,7 @@ public class LoginViewModel extends AndroidViewModel {
             float z = event.values[2];
 
             if (x>13 || y>13 || z>13) {
-                Toast.makeText(getApplication(), "Agitación detectada llamando a la Inmobiliaria de la ULP", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplication(), "Agitación detectada llamando a la Inmobiliaria de la ULP", Toast.LENGTH_LONG).show();
                 Log.d("LoginViewModel.AgitarEvent_LOG", "Agitación detectada");
 
                 Intent call = new Intent(Intent.ACTION_CALL);

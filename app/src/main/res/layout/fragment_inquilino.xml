@@ -11,7 +11,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999">
+        app:layout_constraintVertical_bias="0.25">
 
         <!-- IMAGEN SUPERIOR CON ÍCONO -->
 
@@ -172,6 +172,8 @@
 
             </LinearLayout>
 
+            <!-- DIRECCIÓN TEXTUAL -->
+
             <!-- ===== SECCIÓN PROPIETARIO ===== -->
 
             <View
@@ -181,5 +183,9 @@
                 android:background="#EEEEEE" />
 
         </LinearLayout>
+
+        <!-- BOTONES INFERIORES -->
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

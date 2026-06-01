@@ -159,13 +159,23 @@ public class InmueblesViewModel extends AndroidViewModel {
         }
     }
 
-    public void cargarScrollInmuebleId(Bundle bundle) {
+    public void cargarScrollInmuebleId(List<Inmueble> inmuebles, Bundle bundle) {
         int id = -1;
         if (bundle!=null) {
             id = bundle.getInt("NuevoInmuebleID");
 
-            if (id!=-1) {
-                scrollInmuebleId.setValue(id);
+            if (id==-1) return;
+            int position = -1;
+
+            for (int i = 0; i < inmuebles.size(); i++) {
+                if (inmuebles.get(i).getIdInmueble() == id) {
+                    position = i;
+                    break;
+                }
+            }
+
+            if (position != -1) {
+                scrollInmuebleId.setValue(position);
             }
         }
     }

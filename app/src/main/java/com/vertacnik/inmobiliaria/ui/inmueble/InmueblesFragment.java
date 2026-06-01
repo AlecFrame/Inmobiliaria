@@ -1,6 +1,5 @@
 package com.vertacnik.inmobiliaria.ui.inmueble;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -14,13 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vertacnik.inmobiliaria.R;
-import com.vertacnik.inmobiliaria.databinding.ActivityLoginBinding;
 import com.vertacnik.inmobiliaria.databinding.FragmentInmueblesBinding;
-import com.vertacnik.inmobiliaria.modelo.Inmueble;
-
-import java.util.List;
 
 public class InmueblesFragment extends Fragment {
     private FragmentInmueblesBinding binding;
@@ -50,7 +46,7 @@ public class InmueblesFragment extends Fragment {
             binding.rvListaInmueble.setLayoutManager(glm);
             binding.rvListaInmueble.setAdapter(inmuebleAdapter);
 
-            mViewModel.cargarScrollInmuebleId(getArguments());
+            mViewModel.cargarScrollInmuebleId(inmuebles, getArguments());
         });
 
         mViewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
@@ -63,6 +59,7 @@ public class InmueblesFragment extends Fragment {
 
         mViewModel.getScrollInmuebleId().observe(getViewLifecycleOwner(), id -> {
             binding.rvListaInmueble.smoothScrollToPosition(id);
+            getArguments().remove("NuevoInmuebleID");
         });
 
         mViewModel.cargarInmuebles();
