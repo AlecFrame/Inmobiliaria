@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -48,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         vm.getPropietario().observe(this, p -> {
             cambiarEncabezado(p.getNombre(), p.getApellido(), p.getDni(), p.getEmail());
         });
-
-        cargarPropietario();
     }
 
     @SuppressLint("SetTextI18n")
@@ -90,6 +89,13 @@ public class MainActivity extends AppCompatActivity {
         );
     }
     private void initDrawerMenu() {
+        b.drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                cargarPropietario();
+            }
+        });
+
         b.navView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_logout) {
                 showLogoutDialog();

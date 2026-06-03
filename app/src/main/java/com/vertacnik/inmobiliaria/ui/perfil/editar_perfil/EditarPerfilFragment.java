@@ -34,9 +34,6 @@ public class EditarPerfilFragment extends Fragment {
         });
 
         vm.getPerfilActualizado().observe(getViewLifecycleOwner(), result -> {
-            MainActivity m = (MainActivity) getActivity();
-            m.cargarPropietario(); // actualizar el propietario
-
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main)
                     .navigate(R.id.action_editarPerfilFragment_to_perfilFragment);
         });

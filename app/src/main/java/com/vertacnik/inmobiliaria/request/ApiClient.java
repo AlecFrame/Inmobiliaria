@@ -31,6 +31,7 @@ import retrofit2.http.Path;
 
 public class ApiClient {
     public final static String BASE_URL = "https://capacitacion.alwaysdata.net/";
+
     public static MiServicioInmobiliaria getServicio() {
         Gson gson = new GsonBuilder().setLenient().create();
 
